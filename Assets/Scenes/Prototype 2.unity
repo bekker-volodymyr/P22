@@ -613,6 +613,10 @@ MonoBehaviour:
   - {fileID: 7970440974160218305, guid: 455e6c1b86e8f524b8b13aae8976b65e, type: 3}
   - {fileID: 9159363861647684049, guid: 06eda8a9aa8232447957ea205e480c26, type: 3}
   - {fileID: 6737597675230337606, guid: 4b173c79507794b4c9ca47e5c34d0e31, type: 3}
+  _prefabs:
+  - {fileID: 2345862021696374705, guid: 455e6c1b86e8f524b8b13aae8976b65e, type: 3}
+  - {fileID: 126924708709044885, guid: 06eda8a9aa8232447957ea205e480c26, type: 3}
+  - {fileID: 2277511496519978499, guid: 4b173c79507794b4c9ca47e5c34d0e31, type: 3}
   _startDelay: 2
   _spawnInterval: 1.5
   _xRange: 15
@@ -683,7 +687,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76462c2ef1ed5b0469f2ed5de89d7493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prototype2.PlayerController
-  _foodPrefab: {fileID: 1735959887415433553, guid: bf4e43c5cc3c30049a0869d61b2f788a, type: 3}
+  _foodPrefab: {fileID: 1079043120301072488, guid: bf4e43c5cc3c30049a0869d61b2f788a, type: 3}
   _speed: 25
   _bound: 15
 --- !u!1 &1590138454

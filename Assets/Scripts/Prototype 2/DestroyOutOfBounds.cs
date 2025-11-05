@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace Prototype2
 {
+    [RequireComponent(typeof(PoolableObject))]
     public class DestroyOutOfBounds : MonoBehaviour
     {
         [SerializeField]
@@ -10,22 +11,24 @@ namespace Prototype2
         [SerializeField]
         private float _lowerBound = -5f;
 
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
+        private PoolableObject _poolable;
+
         void Start()
         {
-
+            _poolable = GetComponent<PoolableObject>();
         }
 
-        // Update is called once per frame
         void Update()
         {
             if (transform.position.z > _upperBound)
             {
-                Destroy(gameObject);
+                _poolable.ReturnCallback();
+                // Destroy(gameObject);
             }
             else if (transform.position.z < _lowerBound)
             {
-                Destroy(gameObject);
+                _poolable.ReturnCallback();
+                // Destroy(gameObject);
                 Debug.Log("GAME OVER");
                 Time.timeScale = 0f;
             }

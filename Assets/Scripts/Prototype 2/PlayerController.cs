@@ -6,7 +6,7 @@ namespace Prototype2
     public class PlayerController : MonoBehaviour
     {
         [SerializeField]
-        private GameObject _foodPrefab;
+        private PoolableObject _foodPrefab;
 
         [SerializeField]
         private float _speed = 25f;
@@ -19,9 +19,12 @@ namespace Prototype2
 
         private Vector2 _moveInput;
 
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
+        private ObjectPool<PoolableObject> _pool;
+
         void Start()
         {
+            _pool = new ObjectPool<PoolableObject>(_foodPrefab);
+
             _moveAction = InputSystem.actions.FindAction("Move");
             _fireAction = InputSystem.actions.FindAction("Fire");
 
@@ -33,7 +36,10 @@ namespace Prototype2
         private void OnFire(InputAction.CallbackContext context)
         {
             // Spawn food
-            Instantiate(_foodPrefab, transform.position, Quaternion.identity);
+            var food = _pool.GetObject();
+            food.gameObject.transform.position = transform.position;
+            food.gameObject.SetActive(true);
+            // Instantiate(_foodPrefab, transform.position, Quaternion.identity);
         }
 
         private void OnMove(InputAction.CallbackContext context)

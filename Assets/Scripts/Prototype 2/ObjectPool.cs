@@ -18,6 +18,7 @@ namespace Prototype2
         public T GetObject()
         {
             T obj = _queue.Count > 0 ? _queue.Dequeue() : Object.Instantiate(_prefab);
+            obj.ReturnCallback = () => { ReturnObject(obj); };
             return obj;
         }
 
