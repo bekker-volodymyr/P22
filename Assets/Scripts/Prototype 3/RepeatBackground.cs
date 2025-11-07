@@ -23,6 +23,8 @@ namespace Prototype3
 
         void Update()
         {
+            if (GameManager.IsGameOver) return;
+
             transform.Translate(Vector3.left * _speed * Time.deltaTime);
 
             if (transform.position.x < _startPos.x - _repeatWidth)

@@ -26,6 +26,8 @@ namespace Prototype3
 
         private void SpawnObstacle()
         {
+            if (GameManager.IsGameOver) return;
+
             var obstacle = _pool.GetObject();
             obstacle.transform.position = _spawnPos;
             obstacle.gameObject.SetActive(true);

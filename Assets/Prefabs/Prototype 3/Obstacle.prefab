@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6031321528177450189}
   m_Layer: 0
   m_Name: Obstacle
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MoveLeft
   _speed: 20
+  _leftBound: -10
 --- !u!114 &6031321528177450189
 MonoBehaviour:
   m_ObjectHideFlags: 0
