@@ -1,4 +1,7 @@
-public class GameManager
+namespace Prototype3
 {
-    public static bool IsGameOver = false;
+    public class GameManager
+    {
+        public static bool IsGameOver = false;
+    }
 }
