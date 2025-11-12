@@ -18,6 +18,8 @@ namespace Prototype4
         [SerializeField]
         private float _powerUpCoundown = 5f;
 
+        [SerializeField]
+        private GameObject _powerUpIndicator;
 
         void Start()
         {
@@ -28,6 +30,11 @@ namespace Prototype4
 
         void Update()
         {
+            _powerUpIndicator.transform.position = new Vector3(
+                transform.position.x,
+                transform.position.y - 0.25f,
+                transform.position.z);
+
             float _fwdInput = Input.GetAxis("Vertical");
             _rb.AddForce(_focalPoint.transform.forward * _speed * _fwdInput);
         }
@@ -37,6 +44,7 @@ namespace Prototype4
             if (other.CompareTag("PowerUp"))
             {
                 _hasPowerUp = true;
+                _powerUpIndicator.SetActive(true);
                 StartCoroutine(PowerUpCountdownRoutine());
                 Destroy(other.gameObject);
             }
@@ -59,6 +67,7 @@ namespace Prototype4
             // logic
             // yield return 
             _hasPowerUp = false;
+            _powerUpIndicator.SetActive(false);
         }
     }
 }
