@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Prototype5
 {
@@ -21,8 +22,9 @@ namespace Prototype5
         [SerializeField]
         private float _spawnRate = 1.0f;
 
-        void Start()
+        public void StartGame(int difficulty)
         {
+            _spawnRate /= difficulty;
             _scoreTMP.text = $"Score: {_score}";
             StartCoroutine(SpawnTargetCoroutine());
         }
@@ -47,6 +49,11 @@ namespace Prototype5
                     _isGameActive = false;
                 };
             }
+        }
+
+        public void RestartGame()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 }
