@@ -1,66 +1,74 @@
 using System;
 using UnityEngine;
 
-public class Target : MonoBehaviour
+namespace Prototype5
 {
-    private Rigidbody _rb;
-    private float _xRange = 4.3f;
-
-    [SerializeField]
-    private float _minForce = 10f;
-    private float _maxForce = 15f;
-
-    [SerializeField]
-    private float _rangeTorque = 10f;
-
-    [SerializeField]
-    private int _score;
-
-    [SerializeField]
-    private ParticleSystem _particleSystem;
-
-    public event Action<int> OnClicked;
-
-    void Start()
+    public class Target : MonoBehaviour
     {
-        _rb = GetComponent<Rigidbody>();
+        private Rigidbody _rb;
+        private float _xRange = 4.3f;
 
-        transform.position = GetRandomPos();
+        [SerializeField]
+        private float _minForce = 10f;
+        private float _maxForce = 15f;
 
-        _rb.AddForce(Vector3.up * GetRandomForce(), ForceMode.Impulse);
-        _rb.AddTorque(
-            GetRandomTorque(),
-            GetRandomTorque(),
-            GetRandomTorque(),
-            ForceMode.Impulse
-            );
-    }
+        [SerializeField]
+        private float _rangeTorque = 10f;
 
-    private Vector3 GetRandomPos()
-    {
-        return new Vector3(UnityEngine.Random.Range(-_xRange, _xRange), -1f);
-    }
+        [SerializeField]
+        private int _score;
 
-    private float GetRandomForce()
-    {
-        return UnityEngine.Random.Range(_minForce, _maxForce);
-    }
+        [SerializeField]
+        private ParticleSystem _particleSystem;
 
-    private float GetRandomTorque()
-    {
-        return UnityEngine.Random.Range(-_rangeTorque, _rangeTorque);
-    }
+        public event Action<int> OnClicked;
+        public event Action GameOverEvent;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        Destroy(gameObject);
-    }
+        void Start()
+        {
+            _rb = GetComponent<Rigidbody>();
 
-    private void OnMouseDown()
-    {
-        OnClicked?.Invoke(_score);
-        // _particleSystem.Play();
-        Instantiate(_particleSystem, transform.position, transform.rotation);
-        Destroy(gameObject);
+            transform.position = GetRandomPos();
+
+            _rb.AddForce(Vector3.up * GetRandomForce(), ForceMode.Impulse);
+            _rb.AddTorque(
+                GetRandomTorque(),
+                GetRandomTorque(),
+                GetRandomTorque(),
+                ForceMode.Impulse
+                );
+        }
+
+        private Vector3 GetRandomPos()
+        {
+            return new Vector3(UnityEngine.Random.Range(-_xRange, _xRange), -1f);
+        }
+
+        private float GetRandomForce()
+        {
+            return UnityEngine.Random.Range(_minForce, _maxForce);
+        }
+
+        private float GetRandomTorque()
+        {
+            return UnityEngine.Random.Range(-_rangeTorque, _rangeTorque);
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            Destroy(gameObject);
+            if (!gameObject.CompareTag("Bad"))
+            {
+                GameOverEvent?.Invoke();
+            }
+        }
+
+        private void OnMouseDown()
+        {
+            OnClicked?.Invoke(_score);
+            // _particleSystem.Play();
+            Instantiate(_particleSystem, transform.position, transform.rotation);
+            Destroy(gameObject);
+        }
     }
 }
